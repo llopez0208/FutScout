@@ -14,6 +14,33 @@
             <p>Goals: {{ player.goals }}</p>
             <p>Assists: {{ player.assists }}</p>
             <p>Matches Played: {{ player.matches_played }}</p>
+            
+            <!-- Role Assignment for Various Positions -->
+            <p>Role: 
+                {% if player.position == 'ST' %}
+                    Advanced Forward / Pressing Forward / Target Man / Complete Forward / Deep Lying Forward
+                {% elif player.position == 'LW' %}
+                    Inside Forward / Inverted Winger / Winger
+                {% elif player.position == 'RW' %}
+                    Inside Forward / Inverted Winger / Winger
+                {% elif player.position == 'CAM' %}
+                    Attacking Midfielder / Advanced Playmaker / Shadow Striker / Enganche
+                {% elif player.position == 'CM' %}
+                    Box to Box / Ball Winning Midfielder / Deep Lying Playmaker / Advanced Playmaker / Mezzala
+                {% elif player.position == 'CDM' %}
+                    Ball Winning Midfielder / Deep Lying Playmaker / Regista / Anchor / Defensive Midfielder
+                {% elif player.position == 'RB' %}
+                    Wing Back / Fullback / Inverted Fullback / Complete Wingback
+                {% elif player.position == 'LB' %}
+                    Wing Back / Fullback / Inverted Fullback / Complete Wingback
+                {% elif player.position == 'CB' %}
+                    Ball Playing Defender / Stopper / Central Defender / No Nonsense Centre Back
+                {% elif player.position == 'GK' %}
+                    Sweeper Keeper / Goalkeeper
+                {% else %}
+                    General Role (e.g., Midfielder, Defender, Goalkeeper)
+                {% endif %}
+            </p>
         </li>
     {% endfor %}
     </ul>
