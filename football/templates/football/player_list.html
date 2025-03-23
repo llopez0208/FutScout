@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Football Players</title>
+</head>
+<body>
+    <h1>Football Players</h1>
+    <ul>
+    {% for player in players %}
+        <li>
+            <h2>{{ player.name }}</h2>
+            <p>Team: {{ player.team.name }}</p>
+            <p>Position: {{ player.position }}</p>
+            <p>Goals: {{ player.goals }}</p>
+            <p>Assists: {{ player.assists }}</p>
+            <p>Matches Played: {{ player.matches_played }}</p>
+        </li>
+    {% endfor %}
+    </ul>
+</body>
+</html>

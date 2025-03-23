@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Football Teams</title>
+</head>
+<body>
+    <h1>Football Teams</h1>
+    <ul>
+    {% for team in teams %}
+        <li>
+            <h2>{{ team.name }}</h2>
+            <p>Founded: {{ team.founded_year }}</p>
+            <p>Country: {{ team.country }}</p>
+            <img src="{{ team.logo.url }}" alt="{{ team.name }} Logo" width="100">
+        </li>
+    {% endfor %}
+    </ul>
+</body>
+</html>
