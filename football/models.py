@@ -20,12 +20,143 @@ class Player(models.Model):
     assists = models.IntegerField(default=0)
     matches_played = models.IntegerField(default=0)
 
+    # Player statistics
+    shooting = models.IntegerField(default=0)
+    passing = models.IntegerField(default=0)
+    dribbling = models.IntegerField(default=0)
+    tackling = models.IntegerField(default=0)
+    vision = models.IntegerField(default=0)
+    stamina = models.IntegerField(default=0)
+    heading = models.IntegerField(default=0)
+    off_the_ball = models.IntegerField(default=0)
+    crossing = models.IntegerField(default=0)
+    reflexes = models.IntegerField(default=0)
+    handling = models.IntegerField(default=0)
+
+# Role Classes for Striker (ST)
+class Striker:
+    def __init__(self, player):
+        self.player = player
+
+    def get_role(self):
+        if self.player.shooting > 15:
+            return "Advanced Forward"
+        elif self.player.off_the_ball > 15:
+            return "Pressing Forward"
+        elif self.player.heading > 12:
+            return "Target Man"
+        else:
+            return "Deep Lying Forward"
+
+
+# Role Classes for Winger (LW / RW)
+class Winger:
+    def __init__(self, player):
+        self.player = player
+
+    def get_role(self):
+        if self.player.dribbling > 15:
+            return "Inside Forward"
+        elif self.player.passing > 14:
+            return "Winger"
+        else:
+            return "Inverted Winger"
+
+
+# Role Classes for Attacking Midfielder (CAM)
+class AttackingMidfielder:
+    def __init__(self, player):
+        self.player = player
+
+    def get_role(self):
+        if self.player.passing > 15 and self.player.vision > 15:
+            return "Advanced Playmaker"
+        elif self.player.shooting > 12:
+            return "Shadow Striker"
+        else:
+            return "Attacking Midfielder "
+
+
+# Role Classes for Central Midfielder (CM)
+class CentralMidfielder:
+    def __init__(self, player):
+        self.player = player
+
+    def get_role(self):
+        if self.player.tackling > 12 and self.player.stamina > 14:
+            return "Ball Winning Midfielder"
+        elif self.player.passing > 14:
+            return "Deep Lying Playmaker"
+        elif self.player.stamina > 15:
+            return "Box to Box"
+        else:
+            return "Mezzala"
+
+
+# Role Classes for Defensive Midfielder (CDM)
+class DefensiveMidfielder:
+    def __init__(self, player):
+        self.player = player
+
+    def get_role(self):
+        if self.player.tackling > 15:
+            return "Defensive Midfielder"
+        elif self.player.passing > 13:
+            return "Regista"
+        else:
+            return "Anchor"
+
+
+# Role Classes for Fullback (RB / LB)
+class Fullback:
+    def __init__(self, player):
+        self.player = player
+
+    def get_role(self):
+        if self.player.crossing > 14:
+            return "Wing Back"
+        elif self.player.tackling > 12:
+            return "Fullback"
+        else:
+            return "Inverted Fullback"
+
+
+# Role Classes for Center Back (CB)
+class CenterBack:
+    def __init__(self, player):
+        self.player = player
+
+    def get_role(self):
+        if self.player.tackling > 15 and self.player.strength > 15:
+            return "Ball Playing Defender"
+        elif self.player.positioning > 14:
+            return "Stopper"
+        else:
+            return "Central Defender"
+
+
+# Role Classes for Goalkeeper (GK)
+class Goalkeeper:
+    def __init__(self, player):
+        self.player = player
+
+    def get_role(self):
+        if self.player.reflexes > 15:
+            return "Sweeper Keeper"
+        elif self.player.handling > 15:
+            return "Goalkeeper"
+        else:
+            return "Goalkeeper"
+
+
+
+
     def __str__(self):
         return self.name
     
     def assign_role(self):
         """
-        Assigns a role based on the player's position (without any statistics-based logic yet).
+        Assigns a role based on the player's position and statistics(1-20 scale).
         """
         if self.position == 'ST':
             return Striker().get_role()

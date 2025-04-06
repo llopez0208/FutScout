@@ -15,32 +15,81 @@
             <p>Assists: {{ player.assists }}</p>
             <p>Matches Played: {{ player.matches_played }}</p>
             
-            <!-- Role Assignment for Various Positions -->
-            <p>Role: 
-                {% if player.position == 'ST' %}
-                    Advanced Forward / Pressing Forward / Target Man / Complete Forward / Deep Lying Forward
-                {% elif player.position == 'LW' %}
-                    Inside Forward / Inverted Winger / Winger
-                {% elif player.position == 'RW' %}
-                    Inside Forward / Inverted Winger / Winger
-                {% elif player.position == 'CAM' %}
-                    Attacking Midfielder / Advanced Playmaker / Shadow Striker / Enganche
-                {% elif player.position == 'CM' %}
-                    Box to Box / Ball Winning Midfielder / Deep Lying Playmaker / Advanced Playmaker / Mezzala
-                {% elif player.position == 'CDM' %}
-                    Ball Winning Midfielder / Deep Lying Playmaker / Regista / Anchor / Defensive Midfielder
-                {% elif player.position == 'RB' %}
-                    Wing Back / Fullback / Inverted Fullback / Complete Wingback
-                {% elif player.position == 'LB' %}
-                    Wing Back / Fullback / Inverted Fullback / Complete Wingback
-                {% elif player.position == 'CB' %}
-                    Ball Playing Defender / Stopper / Central Defender / No Nonsense Centre Back
-                {% elif player.position == 'GK' %}
-                    Sweeper Keeper / Goalkeeper
-                {% else %}
-                    General Role (e.g., Midfielder, Defender, Goalkeeper)
-                {% endif %}
-            </p>
+<!-- Role Assignment for Various Positions Based on Stats -->
+<p>Role: 
+    {% if player.position == 'ST' %}
+        {% if player.shooting > 15 %}
+            Advanced Forward / Complete Forward
+        {% elif player.off_the_ball > 15 %}
+            Pressing Forward / Target Man
+        {% elif player.heading > 12 %}
+            Target Man
+        {% else %}
+            Deep Lying Forward
+        {% endif %}
+    {% elif player.position == 'LW' or player.position == 'RW' %}
+        {% if player.dribbling > 15 %}
+            Inside Forward / Inverted Winger
+        {% elif player.crossing > 12 %}
+            Winger
+        {% else %}
+            Inverted Winger
+        {% endif %}
+    {% elif player.position == 'CAM' %}
+        {% if player.passing > 15 and player.vision > 15 %}
+            Attacking Midfielder / Advanced Playmaker
+        {% elif player.shot_accuracy > 12 %}
+            Shadow Striker
+        {% else %}
+            Enganche
+        {% endif %}
+    {% elif player.position == 'CM' %}
+        {% if player.tackling > 12 and player.stamina > 14 %}
+            Box to Box / Ball Winning Midfielder
+        {% elif player.passing > 85 %}
+            Deep Lying Playmaker / Advanced Playmaker
+        {% elif player.stamina > 75 %}
+            Mezzala
+        {% else %}
+            Box to Box
+        {% endif %}
+    {% elif player.position == 'CDM' %}
+        {% if player.tackling > 50 %}
+            Ball Winning Midfielder / Defensive Midfielder
+        {% elif player.passing > 20 %}
+            Deep Lying Playmaker / Regista
+        {% else %}
+            Anchor
+        {% endif %}
+    {% elif player.position == 'RB' or player.position == 'LB' %}
+        {% if player.crossing > 25 %}
+            Wing Back / Complete Wingback
+        {% elif player.tackling > 40 %}
+            Fullback
+        {% else %}
+            Inverted Fullback
+        {% endif %}
+    {% elif player.position == 'CB' %}
+        {% if player.tackling > 45 %}
+            Ball Playing Defender / No Nonsense Centre Back
+        {% elif player.tackling > 25 %}
+            Stopper
+        {% else %}
+            Central Defender
+        {% endif %}
+    {% elif player.position == 'GK' %}
+        {% if player.saves > 40 %}
+            Goalkeeper
+        {% elif player.saves > 25 %}
+            Sweeper Keeper
+        {% else %}
+            Goalkeeper
+        {% endif %}
+    {% else %}
+        General Role (e.g., Midfielder, Defender, Goalkeeper)
+    {% endif %}
+</p>
+
         </li>
     {% endfor %}
     </ul>
