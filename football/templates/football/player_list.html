@@ -46,41 +46,41 @@
     {% elif player.position == 'CM' %}
         {% if player.tackling > 12 and player.stamina > 14 %}
             Box to Box / Ball Winning Midfielder
-        {% elif player.passing > 85 %}
+        {% elif player.passing > 15 %}
             Deep Lying Playmaker / Advanced Playmaker
-        {% elif player.stamina > 75 %}
+        {% elif player.stamina > 15 %}
             Mezzala
         {% else %}
             Box to Box
         {% endif %}
     {% elif player.position == 'CDM' %}
-        {% if player.tackling > 50 %}
+        {% if player.tackling > 15 %}
             Ball Winning Midfielder / Defensive Midfielder
-        {% elif player.passing > 20 %}
+        {% elif player.passing > 15 %}
             Deep Lying Playmaker / Regista
         {% else %}
             Anchor
         {% endif %}
     {% elif player.position == 'RB' or player.position == 'LB' %}
-        {% if player.crossing > 25 %}
+        {% if player.crossing > 14 %}
             Wing Back / Complete Wingback
-        {% elif player.tackling > 40 %}
+        {% elif player.tackling > 13 %}
             Fullback
         {% else %}
             Inverted Fullback
         {% endif %}
     {% elif player.position == 'CB' %}
-        {% if player.tackling > 45 %}
+        {% if player.tackling > 15 %}
             Ball Playing Defender / No Nonsense Centre Back
-        {% elif player.tackling > 25 %}
-            Stopper
-        {% else %}
+        {% elif player.heading > 15 %}
             Central Defender
+        {% else %}
+            Stopper
         {% endif %}
     {% elif player.position == 'GK' %}
-        {% if player.saves > 40 %}
+        {% if player.reflexes> 15 %}
             Goalkeeper
-        {% elif player.saves > 25 %}
+        {% elif player.handling > 15 %}
             Sweeper Keeper
         {% else %}
             Goalkeeper
