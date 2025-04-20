@@ -19,9 +19,9 @@
 <p>Role: 
     {% if player.position == 'ST' %}
         {% if player.shooting > 15 %}
-            Advanced Forward / Complete Forward
+            Advanced Forward 
         {% elif player.off_the_ball > 15 %}
-            Pressing Forward / Target Man
+            Pressing Forward 
         {% elif player.heading > 12 %}
             Target Man
         {% else %}
@@ -37,19 +37,19 @@
         {% endif %}
     {% elif player.position == 'CAM' %}
         {% if player.passing > 15 and player.vision > 15 %}
-            Attacking Midfielder / Advanced Playmaker
+             Advanced Playmaker
         {% elif player.shot_accuracy > 12 %}
             Shadow Striker
         {% else %}
-            Enganche
+            Attacking Midfielder
         {% endif %}
     {% elif player.position == 'CM' %}
         {% if player.tackling > 12 and player.stamina > 14 %}
-            Box to Box / Ball Winning Midfielder
+             Ball Winning Midfielder
         {% elif player.passing > 15 %}
-            Deep Lying Playmaker / Advanced Playmaker
+            Deep Lying Playmaker 
         {% elif player.stamina > 15 %}
-            Mezzala
+            Box to Box
         {% else %}
             Box to Box
         {% endif %}

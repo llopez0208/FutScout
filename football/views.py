@@ -10,10 +10,9 @@ def player_list(request):
     return render(request, 'football/player_list.html', {'players': players})
 
 def create_test_player(request):
-    # Create a team
-    team = Team.objects.create(name="Example FC", founded_year=1990, country="England")
+    team = Team.objects.first
 
-    # Create a player with the attributes you provided
+    # Creating a player with the attributes provided
     player = Player.objects.create(
         name="Nicolas Jackson",
         position="ST",  # Striker position
